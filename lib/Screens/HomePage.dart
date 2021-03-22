@@ -6,25 +6,24 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  ValueNotifier message ;
+  String message = "";
   ScrollController _controller;
-  ValueNotifier message1;
 
   _scrollListener() {
     if (_controller.offset.ceil() >= _controller.position.maxScrollExtent) {
       print("hai");
       setState(() {
-        message.value = "ASASASA";
+        message = "ASASASA";
       });
     }
     if (_controller.offset >= _controller.position.maxScrollExtent &&
         !_controller.position.outOfRange) {
       setState(() {
-        message.value = "All caught up 🎉";
+        message = "All caught up 🎉";
       });
     } else {
       setState(() {
-        message.value = "";
+        message = "";
       });
     }
   }
@@ -46,19 +45,16 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Expanded(
             child: ListView.builder(
+              
               controller: _controller,
               physics: BouncingScrollPhysics(),
-              itemCount: 15,
+              itemCount: 20,
               itemBuilder: (context, index) {
                 return ListTile(title: Text("Index : $index"));
               },
             ),
           ),
-          ValueListenableBuilder<String>(
-              valueListenable: message.value,
-              builder: (context, value, _) {
-                return Text(message.value.toString());
-              }),
+          message.length > 0 ? Text(message) : SizedBox(),
         ],
       ),
     );
