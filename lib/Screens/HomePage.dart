@@ -10,13 +10,6 @@ class _MyHomePageState extends State<MyHomePage> {
   ScrollController _controller;
 
   _scrollListener() {
-//   if (_controller.position.viewportDimension >= _controller.position.maxScrollExtent) {
-//   _controller.animateTo(
-//     _controller.position.maxScrollExtent,
-//     duration: new Duration(milliseconds: 200),
-//     curve: Curves.easeOut,
-//   );
-// }
     if (_controller.offset >= _controller.position.maxScrollExtent &&
         !_controller.position.outOfRange) {
       setState(() {
@@ -48,13 +41,34 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ListView.builder(
               controller: _controller,
               physics: BouncingScrollPhysics(),
-              itemCount: 12,
+              itemCount: 15,
               itemBuilder: (context, index) {
-                return ListTile(title: Text("Index : $index"));
+                return Container(
+                  width: 20,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 20,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.5),
+                        color: Colors.green[100],
+                      ),
+                      child: Center(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Index $index"),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
               },
             ),
           ),
-          Text(message),
+          message.length > 0 ? Text(message) : SizedBox(),
         ],
       ),
     );
