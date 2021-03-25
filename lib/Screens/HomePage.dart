@@ -8,47 +8,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String message = "";
   ScrollController _controller;
-  List myList = [
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    "a",
-    
-    "a",
-  ];
+
   _scrollListener() {
-    print("scrolling");
-    setState(() {
-      message = "ASASASA";
-      myList.add("value");
-    });
-    if (_controller.offset.ceil() >= _controller.position.maxScrollExtent) {
-      print("hai");
-      setState(() {
-        message = "ASASASA";
-      });
-    }
     if (_controller.offset >= _controller.position.maxScrollExtent &&
-        !_controller.position.outOfRange && myList[myList.length-1]!="value") {
+        !_controller.position.outOfRange) {
       setState(() {
         message = "All caught up 🎉";
-        
       });
     } else {
       setState(() {
@@ -76,9 +41,30 @@ class _MyHomePageState extends State<MyHomePage> {
             child: ListView.builder(
               controller: _controller,
               physics: BouncingScrollPhysics(),
-              itemCount: myList.length,
+              itemCount: 15,
               itemBuilder: (context, index) {
-                return ListTile(title: Text(myList[index]));
+                return Container(
+                  width: 20,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      width: 20,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.5),
+                        color: Colors.green[100],
+                      ),
+                      child: Center(
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Index $index"),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                );
               },
             ),
           ),
